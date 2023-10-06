@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+streamlit_slides/frontend/node_modules/
+.DS_Store
+*/.DS_Store
+
 # C extensions
 *.so
 
