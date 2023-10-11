@@ -36,11 +36,11 @@ class SlideshowButtons extends StreamlitComponentBase<State> {
       //style.border = `1px solid ${theme.primaryColor}`
       style.cursor = `pointer`
       //style.position = `absolute`
-      style.top = `50%`
+      //style.top = `50%`
       style.width = `auto`
       //style.margin-top = `-22px`
       style.padding = `16px`
-      style.color = `white`
+      //style.color = `white`
       style.fontWeight = `bold`
       style.fontSize = `18px`
       //style.transition = `0.6s ease`
@@ -53,7 +53,13 @@ class SlideshowButtons extends StreamlitComponentBase<State> {
     // variable, and send its new value back to Streamlit, where it'll
     // be available to the Python program.
     return (
-      <div>
+      <div
+          style={{
+            margin: "auto",
+            width: "200px",
+            //color: "red",
+          }}
+      >
           <a 
             style={style}
             onClick={this.onPreviousCliked}

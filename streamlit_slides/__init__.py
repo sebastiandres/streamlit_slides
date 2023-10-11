@@ -19,11 +19,15 @@ _RELEASE = False
 # best practice.
 
 if not _RELEASE:
+    # This is for local development and testing
+    # We give the component name and the local URL where Streamlit can reach the frontend
+    # Remember to run `npm run start` on the frontend folder to start the local server
+    # This allows to have hot reloading on the frontend
     _component_func = components.declare_component(
         # We give the component a simple, descriptive name ("my_component"
         # does not fit this bill, so please choose something better for your
         # own component :)
-        "my_component",
+        "slideshow_buttons",
         # Pass `url` here to tell Streamlit that the component will be served
         # by the local dev server that you run via `npm run start`.
         # (This is useful while your component is in development.)
@@ -35,7 +39,7 @@ else:
     # build directory:
     parent_dir = os.path.dirname(os.path.abspath(__file__))
     build_dir = os.path.join(parent_dir, "frontend/build")
-    _component_func = components.declare_component("my_component", path=build_dir)
+    _component_func = components.declare_component("slideshow_buttons", path=build_dir)
 
 
 # Create a wrapper function for the component. This is an optional
@@ -59,7 +63,6 @@ def slideshow_buttons(number_of_slides, key=None):
     -------
     int
         The value of the current slide.
-
     """
     # Call through to our private component function. Arguments we pass here
     # will be sent to the frontend, where they'll be available in an "args"
@@ -69,8 +72,8 @@ def slideshow_buttons(number_of_slides, key=None):
     # value of the component before the user has interacted with it.
     component_value = _component_func(
                                         number_of_slides=number_of_slides, 
+                                        default=1,
                                         key=key, 
-                                        default=1
                                     )
 
     # We could modify the value returned from the component if we wanted.
@@ -79,9 +82,14 @@ def slideshow_buttons(number_of_slides, key=None):
 
 
 
-def slide_master(page_title=None, page_icon=None, 
-                layout="centered", initial_sidebar_state="auto", 
-                menu_items=None, DEBUG=False):
+def set_slide_config(
+                    page_title=None, 
+                    page_icon=None, 
+                    layout="centered", 
+                    initial_sidebar_state="auto", 
+                    menu_items=None, 
+                    DEBUG=False
+                ):
     """
     Wrapper that handles all the details
     """
@@ -109,5 +117,9 @@ def slide_master(page_title=None, page_icon=None,
 
     # Displays python file for the current slide
     slide = slides[st.session_state["current_slide"] - 1]
-    exec(open(slide).read())
+    #exec(open(slide).read())
+    #exec(open(slide).read(), globals())
+    with open(slide, "rb") as source_file:
+        code = compile(source_file.read(), slide, "exec")
+    exec(code)#, module.__dict__)
     return
