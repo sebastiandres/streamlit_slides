@@ -21,7 +21,10 @@ streamlit run my_slide_example.py
 ```
 
 # Live example
-You can use the example repository as a starting point: 
+Live demo:
+https://stslides-example.streamlit.app
+Example repo:
+https://github.com/sebastiandres/streamlit_slides_example
 
 * Live example on streamlit cloud
 
