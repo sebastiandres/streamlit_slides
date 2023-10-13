@@ -26,8 +26,7 @@ streamlit run my_slide_example.py
 ```
 
 # The code
-Interested on how it works? Want to contribute? Go to https://github.com/sebastiandres/streamlit_slides/issues
-
+Interested on how it works? Want to contribute? Go to https://github.com/sebastiandres/streamlit_slides
 
 # Examples
 - Live streamlit demo:https://stslides-example.streamlit.app
