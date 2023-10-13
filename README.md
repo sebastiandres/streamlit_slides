@@ -21,12 +21,15 @@ streamlit run my_slide_example.py
 ```
 
 # Live example
-Live demo:
-https://stslides-example.streamlit.app
-Example repo:
-https://github.com/sebastiandres/streamlit_slides_example
+Live demo:https://stslides-example.streamlit.app
+
+Example repo: https://github.com/sebastiandres/streamlit_slides_example
 
 * Live example on streamlit cloud
 
 # Known bugs
 - Cannot use st.echo
+
+# Unknown bugs
+File an issue at the repo: https://github.com/sebastiandres/streamlit_slides
+
