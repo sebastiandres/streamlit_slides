@@ -20,16 +20,18 @@ ss.set_slide_config() # Same properties as st.set_page_config()
 streamlit run my_slide_example.py
 ```
 
-# Live example
-Live demo:https://stslides-example.streamlit.app
+# The code
+Interested on how it works? Want to contribute? Go to https://github.com/sebastiandres/streamlit_slides/issues
 
-Example repo: https://github.com/sebastiandres/streamlit_slides_example
 
-* Live example on streamlit cloud
+# Examples
+- Live streamlit demo:https://stslides-example.streamlit.app
+- Example repo: https://github.com/sebastiandres/streamlit_slides_example
 
-# Known bugs
+# Bugs?
+
+## Known bugs
 - Cannot use st.echo
 
-# Unknown bugs
-File an issue at the repo: https://github.com/sebastiandres/streamlit_slides
-
+## Unknown bugs
+File an issue at the repo: https://github.com/sebastiandres/streamlit_slides/issues
