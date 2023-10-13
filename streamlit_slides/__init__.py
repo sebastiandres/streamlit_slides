@@ -5,7 +5,7 @@ import streamlit.components.v1 as components
 # the component, and True when we're ready to package and distribute it.
 # (This is, of course, optional - there are innumerable ways to manage your
 # release process.)
-_RELEASE = False
+_RELEASE = True
 
 # Declare a Streamlit component. `declare_component` returns a function
 # that is used to create instances of the component. We're naming this
@@ -18,7 +18,14 @@ _RELEASE = False
 # your component frontend. Everything else we do in this file is simply a
 # best practice.
 
-if not _RELEASE:
+if _RELEASE:
+    # When we're distributing a production version of the component, we'll
+    # replace the `url` param with `path`, and point it to the component's
+    # build directory:
+    parent_dir = os.path.dirname(os.path.abspath(__file__))
+    build_dir = os.path.join(parent_dir, "frontend/build")
+    _component_func = components.declare_component("slideshow_buttons", path=build_dir)
+else:
     # This is for local development and testing
     # We give the component name and the local URL where Streamlit can reach the frontend
     # Remember to run `npm run start` on the frontend folder to start the local server
@@ -33,13 +40,6 @@ if not _RELEASE:
         # (This is useful while your component is in development.)
         url="http://localhost:3001",
     )
-else:
-    # When we're distributing a production version of the component, we'll
-    # replace the `url` param with `path`, and point it to the component's
-    # build directory:
-    parent_dir = os.path.dirname(os.path.abspath(__file__))
-    build_dir = os.path.join(parent_dir, "frontend/build")
-    _component_func = components.declare_component("slideshow_buttons", path=build_dir)
 
 
 # Create a wrapper function for the component. This is an optional
@@ -117,8 +117,6 @@ def set_slide_config(
 
     # Displays python file for the current slide
     slide = slides[st.session_state["current_slide"] - 1]
-    #exec(open(slide).read())
-    #exec(open(slide).read(), globals())
     with open(slide, "rb") as source_file:
         code = compile(source_file.read(), slide, "exec")
     exec(code)#, module.__dict__)

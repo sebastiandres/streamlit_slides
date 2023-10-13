@@ -7,10 +7,10 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="streamlit-slides",
-    version="0.0.1",
+    version="0.0.2",
     author="Sebastian Flores",
     author_email="sebastiandres@gmail.com",
-    description="Streamlit component to present slides",
+    description="Streamlit component to present streamlit files as slides",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="",

@@ -9,3 +9,10 @@ npm run start  # Start the Webpack dev server
 # /Users/sebastiandres/Projects/streamlit/streamlit_slides
 source venv/bin/activate
 streamlit run Home.py
+
+
+# To upload to pypi
+- Make sure you have installed twine
+  $ pip install twine
+- run the make
+  $ make pypi

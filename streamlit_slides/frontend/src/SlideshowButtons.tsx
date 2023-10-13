@@ -33,20 +33,31 @@ class SlideshowButtons extends StreamlitComponentBase<State> {
     if (theme) {
       // Use the theme object to style our button border. Alternatively, the
       // theme style is defined in CSS vars.
-      //style.border = `1px solid ${theme.primaryColor}`
       style.cursor = `pointer`
-      //style.position = `absolute`
-      //style.top = `50%`
       style.width = `auto`
-      //style.margin-top = `-22px`
       style.padding = `16px`
-      //style.color = `white`
       style.fontWeight = `bold`
       style.fontSize = `18px`
-      //style.transition = `0.6s ease`
       style.borderRadius= `0 3px 3px 0`
       style.userSelect = `none`
     }
+
+    document.addEventListener("keyup", 
+    (e) => {
+      // Avoid default behavior - prevent from firing up the key multiple times 
+      e.stopImmediatePropagation();
+      // Process next slide
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "n" ) {
+          // Use the next slide
+          this.onNextCliked();
+        }
+        // alert(`Key "${e.key}" pressed [event: keydown]`);
+        if (e.key === "ArrowLeft" || e.key === "Backspace" || e.key === "p" ) {
+          // Use the previous slide
+          this.onPreviousCliked();
+        }
+    },
+    true);
 
     // Show a button and some text.
     // When the button is clicked, we'll increment our "currentSlide" state
@@ -56,7 +67,7 @@ class SlideshowButtons extends StreamlitComponentBase<State> {
       <div
           style={{
             margin: "auto",
-            width: "200px",
+            width: "300px",
             //color: "red",
           }}
       >
@@ -66,7 +77,12 @@ class SlideshowButtons extends StreamlitComponentBase<State> {
           >
             &#10094;
           </a>
-          &nbsp; Slide: {this.state.currentSlide}/{number_of_slides} &nbsp;
+          <a
+            style={style}
+            onClick={this.info}
+         >
+            &nbsp; Slide: {this.state.currentSlide}/{number_of_slides} &nbsp;
+          </a>
           <a
             style={style}
             onClick={this.onNextCliked}
@@ -77,15 +93,16 @@ class SlideshowButtons extends StreamlitComponentBase<State> {
     )
   }
 
-    /** Click handler for our "Click Me!" button. */
-    private onPreviousCliked = (): void => {
-      // Increment state.currentSlide, and pass the new value back to
-      // Streamlit via `Streamlit.setComponentValue`.
-      this.setState(
-        prevState => ({ currentSlide: Math.max(1, prevState.currentSlide - 1) }),
-        () => Streamlit.setComponentValue(this.state.currentSlide)
-      )
-    }
+  /** Click handler for our "Click Me!" button. */
+  private onPreviousCliked = (): void => {
+    // Increment state.currentSlide, and pass the new value back to
+    // Streamlit via `Streamlit.setComponentValue`.
+    this.setState(
+      prevState => ({ currentSlide: Math.max(1, prevState.currentSlide - 1) }),
+      () => Streamlit.setComponentValue(this.state.currentSlide)
+    );
+    // console.log("prev slide"); // useful for debugging
+  }
   
   /** Click handler for our "Click Me!" button. */
   private onNextCliked = (): void => {
@@ -94,7 +111,14 @@ class SlideshowButtons extends StreamlitComponentBase<State> {
     this.setState(
       prevState => ({ currentSlide: Math.min(this.props.args["number_of_slides"], prevState.currentSlide + 1) }),
       () => Streamlit.setComponentValue(this.state.currentSlide)
-    )
+    );
+    //console.log("next slide"); // useful for debugging
+  }
+
+  private info = (): void => {
+    // Info on how to use it
+    alert("Use spacebar, right key or 'n' to load the next slide.\nUse backspace, left key or 'p' to load the previous slide");
+    //console.log("next slide"); // useful for debugging
   }
 
 }
