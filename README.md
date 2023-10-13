@@ -1,7 +1,12 @@
 # README
 
-You want to use streamlit to present slides? Search no more. Just follow these steps:
+You want to use streamlit to present slides? Search no more. 
 
+![Animated gif of the demo](/images/example.gif "Animated gif of the demo")
+
+# Using it
+
+Just follow these steps:
 * Install: 
 ```bash
 pip install streamlit-slides
